@@ -71,14 +71,14 @@ task :fetch_cont => :environment do
 						puts "Phone: #{phone}"
 						puts "Image: #{image}"
 						puts "---------------------"
-						# p = Pro.new
-						# p.name = name
-						# p.description = description
-						# p.course_name = course_name
-						# p.course_address = course_address
-						# p.phone = phone
-						# p.image_url = image
-						# p.save
+						p = Pro.new
+						p.name = name
+						p.description = description
+						p.course_name = course_name
+						p.course_address = course_address
+						p.phone = phone
+						p.image_url = image
+						p.save
 					end
 				end
 			end
