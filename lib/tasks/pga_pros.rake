@@ -2,7 +2,7 @@ desc "PGA Pro Rake"
 task :fetch_pros => :environment do
   require 'nokogiri'
   require 'open-uri'
-  
+  	Pro.destroy_all
 	url = "http://www.pga.com/golf-instruction/instructors/"
 	doc = Nokogiri::HTML(open(url))
 	# country level
@@ -27,8 +27,14 @@ task :fetch_pros => :environment do
 				if phone.include? 'Phone'
 					phone = phone[5,phone.length]
 				end
-				course_address = doc5.at_css('.pga-professional-course:nth-child(3)').text
-				course_name = doc5.at_css('.field-field-course-name:nth-child(1) a').text
+				course_address = ""
+				if !doc5.at_css('.pga-professional-course:nth-child(3)').nil?
+					course_address = doc5.at_css('.pga-professional-course:nth-child(3)').text
+				end
+				course_name = ""
+				if !doc5.at_css('.field-field-course-name:nth-child(1) a').nil?
+					course_name = doc5.at_css('.field-field-course-name:nth-child(1) a').text
+				end
 				description = doc5.at_css('.field-wrap').text
 				image = doc5.at_css('.imagecache')['src']
 				puts "Name: #{name}"
