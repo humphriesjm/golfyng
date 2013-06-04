@@ -11,9 +11,11 @@ task :fetch_cont => :environment do
 
 		# url2 = item['href']
 		state_urls = []
-		state_urls << "http://www.pga.com/golf-instruction/instructors/sc"
-		state_urls << "http://www.pga.com/golf-instruction/instructors/sd"
-		# state_urls << "http://www.pga.com/golf-instruction/instructors/tn"
+		# SC DONE
+		# state_urls << "http://www.pga.com/golf-instruction/instructors/sc"
+		# SD DONE
+		# state_urls << "http://www.pga.com/golf-instruction/instructors/sd"
+		state_urls << "http://www.pga.com/golf-instruction/instructors/tn"
 		# state_urls << "http://www.pga.com/golf-instruction/instructors/tx"
 		# state_urls << "http://www.pga.com/golf-instruction/instructors/ut"
 		# state_urls << "http://www.pga.com/golf-instruction/instructors/vt"
