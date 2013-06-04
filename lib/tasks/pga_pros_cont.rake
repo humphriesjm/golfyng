@@ -11,20 +11,11 @@ task :fetch_cont => :environment do
 
 		# url2 = item['href']
 		state_urls = []
-		# SC DONE
-		# state_urls << "http://www.pga.com/golf-instruction/instructors/sc"
-		# SD DONE
-		# state_urls << "http://www.pga.com/golf-instruction/instructors/sd"
-		# TN DONE
-		# state_urls << "http://www.pga.com/golf-instruction/instructors/tn"
-		state_urls << "http://www.pga.com/golf-instruction/instructors/tx"
-		state_urls << "http://www.pga.com/golf-instruction/instructors/ut"
-		state_urls << "http://www.pga.com/golf-instruction/instructors/vt"
-		# state_urls << "http://www.pga.com/golf-instruction/instructors/va"
-		# state_urls << "http://www.pga.com/golf-instruction/instructors/wa"
-		# state_urls << "http://www.pga.com/golf-instruction/instructors/wv"
-		# state_urls << "http://www.pga.com/golf-instruction/instructors/wi"
-		# state_urls << "http://www.pga.com/golf-instruction/instructors/wy"
+		state_urls << "http://www.pga.com/golf-instruction/instructors/va"
+		state_urls << "http://www.pga.com/golf-instruction/instructors/wa"
+		state_urls << "http://www.pga.com/golf-instruction/instructors/wv"
+		state_urls << "http://www.pga.com/golf-instruction/instructors/wi"
+		state_urls << "http://www.pga.com/golf-instruction/instructors/wy"
 		state_urls.each do |state_url|
 			doc2 = Nokogiri::HTML(open(state_url))
 			# state level
