@@ -69,3 +69,5 @@ task :fetch_pros => :environment do
 		end
 	end
 end
+end
+
