@@ -16,42 +16,55 @@ task :fetch_pros => :environment do
 			# page of pros - region level
 			doc3.css(".views-row").each do |item3|
 				doc4 = Nokogiri::HTML(item3.text)
-				url4 = item3.at_css(".imagecache-pgapro_medium")['href']
-				if !url4.include? 'http'
-					url4 = "http://www.pga.com" << url4
+				if !item3.at_css(".imagecache-pgapro_medium").nil?
+					url4 = item3.at_css(".imagecache-pgapro_medium")['href']
+					if !url4.include? 'http'
+						url4 = "http://www.pga.com" << url4
+					end
+					doc5 = Nokogiri::HTML(open(url4))
+					# single pro page
+					name = ""
+					if !doc5.at_css('.title').nil?
+						name = doc5.at_css('.title').text
+					end
+					phone = ""
+					if !doc5.at_css('.contact-field').nil?
+						phone = doc5.at_css('.contact-field').text
+					end
+					if phone.include? 'Phone'
+						phone = phone[5,phone.length]
+					end
+					course_address = ""
+					if !doc5.at_css('.pga-professional-course:nth-child(3)').nil?
+						course_address = doc5.at_css('.pga-professional-course:nth-child(3)').text
+					end
+					course_name = ""
+					if !doc5.at_css('.field-field-course-name:nth-child(1) a').nil?
+						course_name = doc5.at_css('.field-field-course-name:nth-child(1) a').text
+					end
+					description = ""
+					if !doc5.at_css('.field-wrap').nil?
+						description = doc5.at_css('.field-wrap').text
+					end
+					image = ""
+					if !doc5.at_css('.imagecache').nil?
+						image = doc5.at_css('.imagecache')['src']
+					puts "Name: #{name}"
+					puts "Description: #{description}"
+					puts "Course Name: #{course_name}"
+					puts "Course Address: #{course_address}"
+					puts "Phone: #{phone}"
+					puts "Image: #{image}"
+					puts "---------------------"
+					p = Pro.new
+					p.name = name
+					p.description = description
+					p.course_name = course_name
+					p.course_address = course_address
+					p.phone = phone
+					p.image_url = image
+					p.save
 				end
-				doc5 = Nokogiri::HTML(open(url4))
-				# single pro page
-				name = doc5.at_css('.title').text
-				phone = doc5.at_css('.contact-field').text
-				if phone.include? 'Phone'
-					phone = phone[5,phone.length]
-				end
-				course_address = ""
-				if !doc5.at_css('.pga-professional-course:nth-child(3)').nil?
-					course_address = doc5.at_css('.pga-professional-course:nth-child(3)').text
-				end
-				course_name = ""
-				if !doc5.at_css('.field-field-course-name:nth-child(1) a').nil?
-					course_name = doc5.at_css('.field-field-course-name:nth-child(1) a').text
-				end
-				description = doc5.at_css('.field-wrap').text
-				image = doc5.at_css('.imagecache')['src']
-				puts "Name: #{name}"
-				puts "Description: #{description}"
-				puts "Course Name: #{course_name}"
-				puts "Course Address: #{course_address}"
-				puts "Phone: #{phone}"
-				puts "Image: #{image}"
-				puts "---------------------"
-				p = Pro.new
-				p.name = name
-				p.description = description
-				p.course_name = course_name
-				p.course_address = course_address
-				p.phone = phone
-				p.image_url = image
-				p.save
 			end
 		end
 	end
