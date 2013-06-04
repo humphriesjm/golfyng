@@ -15,10 +15,11 @@ task :fetch_cont => :environment do
 		# state_urls << "http://www.pga.com/golf-instruction/instructors/sc"
 		# SD DONE
 		# state_urls << "http://www.pga.com/golf-instruction/instructors/sd"
-		state_urls << "http://www.pga.com/golf-instruction/instructors/tn"
-		# state_urls << "http://www.pga.com/golf-instruction/instructors/tx"
-		# state_urls << "http://www.pga.com/golf-instruction/instructors/ut"
-		# state_urls << "http://www.pga.com/golf-instruction/instructors/vt"
+		# TN DONE
+		# state_urls << "http://www.pga.com/golf-instruction/instructors/tn"
+		state_urls << "http://www.pga.com/golf-instruction/instructors/tx"
+		state_urls << "http://www.pga.com/golf-instruction/instructors/ut"
+		state_urls << "http://www.pga.com/golf-instruction/instructors/vt"
 		# state_urls << "http://www.pga.com/golf-instruction/instructors/va"
 		# state_urls << "http://www.pga.com/golf-instruction/instructors/wa"
 		# state_urls << "http://www.pga.com/golf-instruction/instructors/wv"
