@@ -1,0 +1,35 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Name:</b>
+  <%= @pro.name %>
+</p>
+
+<p>
+  <b>Description:</b>
+  <%= @pro.description %>
+</p>
+
+<p>
+  <b>Course name:</b>
+  <%= @pro.course_name %>
+</p>
+
+<p>
+  <b>Course address:</b>
+  <%= @pro.course_address %>
+</p>
+
+<p>
+  <b>Phone:</b>
+  <%= @pro.phone %>
+</p>
+
+<p>
+  <b>Image url:</b>
+  <%= @pro.image_url %>
+</p>
+
+
+<%= link_to 'Edit', edit_pro_path(@pro) %> |
+<%= link_to 'Back', pros_path %>

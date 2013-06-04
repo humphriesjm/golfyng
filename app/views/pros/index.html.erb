@@ -1,0 +1,33 @@
+<h1>Listing pros</h1>
+
+<table>
+  <tr>
+    <th>Name</th>
+    <th>Description</th>
+    <th>Course name</th>
+    <th>Course address</th>
+    <th>Phone</th>
+    <th>Image url</th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @pros.each do |pro| %>
+  <tr>
+    <td><%= pro.name %></td>
+    <td><%= pro.description %></td>
+    <td><%= pro.course_name %></td>
+    <td><%= pro.course_address %></td>
+    <td><%= pro.phone %></td>
+    <td><%= pro.image_url %></td>
+    <td><%= link_to 'Show', pro %></td>
+    <td><%= link_to 'Edit', edit_pro_path(pro) %></td>
+    <td><%= link_to 'Destroy', pro, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New Pro', new_pro_path %>

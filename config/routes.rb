@@ -1,4 +1,7 @@
 Golfying::Application.routes.draw do
+  resources :pros
+
+
   # The priority is based upon order of creation:
   # first created -> highest priority.
 
