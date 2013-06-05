@@ -2,7 +2,7 @@ class ProsController < ApplicationController
   # GET /pros
   # GET /pros.json
   def index
-    @pros = Pro.all
+    @pros = Pro.limit(20)
 
     respond_to do |format|
       format.html # index.html.erb
