@@ -7,11 +7,10 @@ task :zip_rake => :environment do
 			m = regex_zip.match pro.course_address
 			pro.course_zip = ''
 			if !m.nil?
-				puts m[0]
+				puts m[0][0..4]
 				pro.course_zip = m[0]
 			end
 			pro.save
 		end
 	end
 end
-
