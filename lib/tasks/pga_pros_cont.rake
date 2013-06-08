@@ -13,9 +13,9 @@ task :fetch_cont => :environment do
 		# url2 = item['href']
 		state_urls = []
 		# state_urls << "http://www.pga.com/golf-instruction/instructors/al"
-		state_urls << "http://www.pga.com/golf-instruction/instructors/ak"
-		# state_urls << "http://www.pga.com/golf-instruction/instructors/az"
-		# state_urls << "http://www.pga.com/golf-instruction/instructors/ar"
+		# state_urls << "http://www.pga.com/golf-instruction/instructors/ak"
+		state_urls << "http://www.pga.com/golf-instruction/instructors/az"
+		state_urls << "http://www.pga.com/golf-instruction/instructors/ar"
 		# state_urls << "http://www.pga.com/golf-instruction/instructors/ca"
 		# state_urls << "http://www.pga.com/golf-instruction/instructors/co"
 		# state_urls << "http://www.pga.com/golf-instruction/instructors/ct"
