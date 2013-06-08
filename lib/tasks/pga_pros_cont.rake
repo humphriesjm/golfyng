@@ -3,6 +3,7 @@ task :fetch_cont => :environment do
   require 'nokogiri'
   require 'open-uri'
 
+  	# Pro.destroy_all
 	url = "http://www.pga.com/golf-instruction/instructors/"
 	doc = Nokogiri::HTML(open(url))
 	# country level
@@ -11,11 +12,57 @@ task :fetch_cont => :environment do
 
 		# url2 = item['href']
 		state_urls = []
-		state_urls << "http://www.pga.com/golf-instruction/instructors/va"
-		state_urls << "http://www.pga.com/golf-instruction/instructors/wa"
-		state_urls << "http://www.pga.com/golf-instruction/instructors/wv"
-		state_urls << "http://www.pga.com/golf-instruction/instructors/wi"
-		state_urls << "http://www.pga.com/golf-instruction/instructors/wy"
+		state_urls << "http://www.pga.com/golf-instruction/instructors/al"
+		# state_urls << "http://www.pga.com/golf-instruction/instructors/ak"
+		# state_urls << "http://www.pga.com/golf-instruction/instructors/az"
+		# state_urls << "http://www.pga.com/golf-instruction/instructors/ar"
+		# state_urls << "http://www.pga.com/golf-instruction/instructors/ca"
+		# state_urls << "http://www.pga.com/golf-instruction/instructors/co"
+		# state_urls << "http://www.pga.com/golf-instruction/instructors/ct"
+		# state_urls << "http://www.pga.com/golf-instruction/instructors/de"
+		# state_urls << "http://www.pga.com/golf-instruction/instructors/fl"
+		# state_urls << "http://www.pga.com/golf-instruction/instructors/ga"
+		# state_urls << "http://www.pga.com/golf-instruction/instructors/hi"
+		# state_urls << "http://www.pga.com/golf-instruction/instructors/id"
+		# state_urls << "http://www.pga.com/golf-instruction/instructors/il"
+		# state_urls << "http://www.pga.com/golf-instruction/instructors/in"
+		# state_urls << "http://www.pga.com/golf-instruction/instructors/ia"
+		# state_urls << "http://www.pga.com/golf-instruction/instructors/ks"
+		# state_urls << "http://www.pga.com/golf-instruction/instructors/ky"
+		# state_urls << "http://www.pga.com/golf-instruction/instructors/la"
+		# state_urls << "http://www.pga.com/golf-instruction/instructors/me"
+		# state_urls << "http://www.pga.com/golf-instruction/instructors/md"
+		# state_urls << "http://www.pga.com/golf-instruction/instructors/ma"
+		# state_urls << "http://www.pga.com/golf-instruction/instructors/mi"
+		# state_urls << "http://www.pga.com/golf-instruction/instructors/mn"
+		# state_urls << "http://www.pga.com/golf-instruction/instructors/ms"
+		# state_urls << "http://www.pga.com/golf-instruction/instructors/mo"
+		# state_urls << "http://www.pga.com/golf-instruction/instructors/mt"
+		# state_urls << "http://www.pga.com/golf-instruction/instructors/ne"
+		# state_urls << "http://www.pga.com/golf-instruction/instructors/nv"
+		# state_urls << "http://www.pga.com/golf-instruction/instructors/nh"
+		# state_urls << "http://www.pga.com/golf-instruction/instructors/nj"
+		# state_urls << "http://www.pga.com/golf-instruction/instructors/nm"
+		# state_urls << "http://www.pga.com/golf-instruction/instructors/ny"
+		# state_urls << "http://www.pga.com/golf-instruction/instructors/nc"
+		# state_urls << "http://www.pga.com/golf-instruction/instructors/nd"
+		# state_urls << "http://www.pga.com/golf-instruction/instructors/oh"
+		# state_urls << "http://www.pga.com/golf-instruction/instructors/ok"
+		# state_urls << "http://www.pga.com/golf-instruction/instructors/or"
+		# state_urls << "http://www.pga.com/golf-instruction/instructors/pa"
+		# state_urls << "http://www.pga.com/golf-instruction/instructors/pr"
+		# state_urls << "http://www.pga.com/golf-instruction/instructors/ri"
+		# state_urls << "http://www.pga.com/golf-instruction/instructors/sc"
+		# state_urls << "http://www.pga.com/golf-instruction/instructors/sd"
+		# state_urls << "http://www.pga.com/golf-instruction/instructors/tn"
+		# state_urls << "http://www.pga.com/golf-instruction/instructors/tx"
+		# state_urls << "http://www.pga.com/golf-instruction/instructors/ut"
+		# state_urls << "http://www.pga.com/golf-instruction/instructors/vt"
+		# state_urls << "http://www.pga.com/golf-instruction/instructors/va"
+		# state_urls << "http://www.pga.com/golf-instruction/instructors/wa"
+		# state_urls << "http://www.pga.com/golf-instruction/instructors/wv"
+		# state_urls << "http://www.pga.com/golf-instruction/instructors/wi"
+		# state_urls << "http://www.pga.com/golf-instruction/instructors/wy"
 		state_urls.each do |state_url|
 			doc2 = Nokogiri::HTML(open(state_url))
 			# state level
@@ -44,8 +91,29 @@ task :fetch_cont => :environment do
 							phone = phone[5,phone.length]
 						end
 						course_address = ""
+						course_street = ""
 						if !doc5.at_css('.pga-professional-course:nth-child(3)').nil?
-							course_address = doc5.at_css('.pga-professional-course:nth-child(3)').text
+							course_address = doc5.at_css('.pga-professional-course:nth-child(3)')
+							# get zip
+							# regex_zip = /(\d{5}+)(?!.*\d{5})/
+							# m = regex_zip.match pro.course_address
+							# pro.course_zip = ""
+							# if !m.nil?
+							# 	puts m[0][0..4]
+							# 	pro.course_zip = m[0]
+							# end
+							course_address.search('br').each do |n|
+	  							n.replace(" | ")
+							end
+							course_address = course_address.text
+							course = course_address.split(' | ')
+							course_street = course[1]
+							course_city = course[2]
+							course_address = "#{course_street} #{course_city}"
+							# puts "->course:#{course_street} #{course_city}"
+							# puts "course street:#{course[1]}"
+							# puts "course city:#{course[2]}"
+							# puts "course phone:#{course[3]}"
 						end
 						course_name = ""
 						if !doc5.at_css('.field-field-course-name:nth-child(1) a').nil?
@@ -59,17 +127,19 @@ task :fetch_cont => :environment do
 						if !doc5.at_css('.imagecache').nil?
 							image = doc5.at_css('.imagecache')['src']
 						puts "Name: #{name}"
-						puts "Description: #{description}"
-						puts "Course Name: #{course_name}"
-						puts "Course Address: #{course_address}"
-						puts "Phone: #{phone}"
-						puts "Image: #{image}"
+						# puts "Description: #{description}"
+						# puts "Course Name: #{course_name}"
+						puts "Address: #{course_address}"
+						# puts "Phone: #{phone}"
+						# puts "Image: #{image}"
 						puts "---------------------"
 						p = Pro.new
 						p.name = name
 						p.description = description
 						p.course_name = course_name
 						p.course_address = course_address
+						p.address = course_address
+						p.course_street = course_street
 						p.phone = phone
 						p.image_url = image
 						p.save

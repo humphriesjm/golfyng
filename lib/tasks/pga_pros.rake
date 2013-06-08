@@ -35,8 +35,21 @@ task :fetch_pros => :environment do
 						phone = phone[5,phone.length]
 					end
 					course_address = ""
+					course_street = ""
 					if !doc5.at_css('.pga-professional-course:nth-child(3)').nil?
-						course_address = doc5.at_css('.pga-professional-course:nth-child(3)').text
+						course_address = doc5.at_css('.pga-professional-course:nth-child(3)')
+						course_address.search('br').each do |n|
+  							n.replace(" | ")
+						end
+						course_address = course_address.text
+						course = course_address.split(' | ')
+						course_street = course[1]
+						course_city = course[2]
+						course_address = "#{course_street} #{course_city}"
+						# puts "->course:#{course_street} #{course_city}"
+						# puts "course street:#{course[1]}"
+						# puts "course city:#{course[2]}"
+						# puts "course phone:#{course[3]}"
 					end
 					course_name = ""
 					if !doc5.at_css('.field-field-course-name:nth-child(1) a').nil?
@@ -50,17 +63,18 @@ task :fetch_pros => :environment do
 					if !doc5.at_css('.imagecache').nil?
 						image = doc5.at_css('.imagecache')['src']
 					puts "Name: #{name}"
-					puts "Description: #{description}"
-					puts "Course Name: #{course_name}"
-					puts "Course Address: #{course_address}"
-					puts "Phone: #{phone}"
-					puts "Image: #{image}"
+					# puts "Description: #{description}"
+					# puts "Course Name: #{course_name}"
+					puts "Course Street: #{course_street}"
+					# puts "Phone: #{phone}"
+					# puts "Image: #{image}"
 					puts "---------------------"
 					p = Pro.new
 					p.name = name
 					p.description = description
 					p.course_name = course_name
 					p.course_address = course_address
+					p.course_street = course_street
 					p.phone = phone
 					p.image_url = image
 					p.save
