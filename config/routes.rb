@@ -3,6 +3,7 @@ Golfying::Application.routes.draw do
   root :to => 'pros#search'
 
   get '/search' => 'pros#find'
+  get '/search_pros' => 'pros#search'
 
   resources :pros
 

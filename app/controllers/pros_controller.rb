@@ -26,7 +26,7 @@ class ProsController < ApplicationController
     end
     # puts @search
     # @search_query = @search.to_query
-    @image_tag_string = "http://maps.google.com/maps/api/staticmap?key=AIzaSyC77WBfl-zki0vS7h9zyKyYg3htKcERvuo&size=450x300&sensor=false&zoom=11"
+    @image_tag_string = "http://maps.google.com/maps/api/staticmap?key=AIzaSyC77WBfl-zki0vS7h9zyKyYg3htKcERvuo&size=600x500&sensor=false&zoom=11"
     i = 0
     @pros.each do |pro|
       if !pro.latitude.nil?
