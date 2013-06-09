@@ -17,8 +17,29 @@ class ProsController < ApplicationController
 
   # GET /search/:search_term
   def find
-    @search = params[:search_term]
-    @pros = Pro.where("name like ?", "%#{@search}%")
+    if params[:search_term].present?
+      @search = params[:search_term]
+      @pros = Pro.near(@search, 10)
+    else
+      @search = ""
+      @pros = Pro.limit(20)
+    end
+    # puts @search
+    # @search_query = @search.to_query
+    @image_tag_string = "http://maps.google.com/maps/api/staticmap?key=AIzaSyC77WBfl-zki0vS7h9zyKyYg3htKcERvuo&size=450x300&sensor=false&zoom=11"
+    i = 0
+    @pros.each do |pro|
+      if !pro.latitude.nil?
+        # markers=color:blue%7Clabel:S%7C62.107733,-145.541936
+        i+=1
+        if i==1
+          # @image_tag_string << "&center=#{pro.latitude}%2C#{pro.longitude}"
+          @image_tag_string << "&center=#{@search_term}"
+        end
+        @image_tag_string << "&markers=label:#{i}%7Ccolor:blue%7C#{pro.latitude}%2C#{pro.longitude}"
+      end
+    end
+    # puts @image_tag_string.to_query
   end
 
   # GET /pros/1
