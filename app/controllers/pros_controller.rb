@@ -10,6 +10,17 @@ class ProsController < ApplicationController
     end
   end
 
+  # root route
+  def search
+    @pros = Pro.limit(20)
+  end
+
+  # GET /search/:search_term
+  def find
+    @search = params[:search_term]
+    @pros = Pro.where("name like ?", "%#{@search}%")
+  end
+
   # GET /pros/1
   # GET /pros/1.json
   def show
