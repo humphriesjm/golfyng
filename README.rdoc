@@ -1,3 +1,7 @@
 == Golfyng
 
 Golfying rails app
+
+the fun stuff is in the rake tasks (/lib/tasks)
+
+@humphriesjm
